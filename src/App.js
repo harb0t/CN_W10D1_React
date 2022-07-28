@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
 import './App.css';
 import Box from "./box";
+import SignOrLog from "./components/signOrLog";
 
 const App = () => {
     const [user, setUser] = useState("Steve");
     const [photos, setPhotos] = useState();
 
-    {/* ------------------------------ */}
+//* ------------------------------ *//
 // // pops image immedietly
 // // useEffect(() => {}, [what is is listening for])
 // useEffect(() => {
 //     fetchImages()
 // }, [user]) //everytime user's value changes, useEffecr will run again
-{/* ------------------------------ */}
+//* ------------------------------ *//
 
 // Array for previous activity
 // const arr = [{ name: "Steve" }, { name: "Gary" }, { name: "Tony" }];
 
-{/* ------------------------------ */}
+//* ------------------------------ *//
 
 
 // Taking/fetching images from API
@@ -32,11 +33,13 @@ useEffect(() => {
   }, [user]); //every time user's value changes, useEffect will run again
 
 
-{/* ------------------------------ */}
+//* ------------------------------ *//
 
 
 return (
     <div className="App">
+       <SignOrLog />
+
 
     <input onChange={(event) => setUser(event.target.value)} />
 
@@ -51,8 +54,8 @@ return (
         </div>
         );
     })}
-    /> :
-    <Box name="Type something for pics" />
+/> :
+    <Box name="Work gosh darn it" />
     
     }
 
@@ -63,7 +66,8 @@ return (
 
 export default App;
 
-{/* ------------------------------ */}
+//* ------------------------------ *//
+
 
     // return (
     //     <div className="App">
@@ -77,46 +81,44 @@ export default App;
 
     //         <Box name={user}/>
 
-        {/* <div>
+        /* <div>
             <Box name={item.name}/>
 
 
-        </div> */}
+        </div> */
 
-{/* ------------------------------ */}
+//* ------------------------------ *//
 
+/* onChange when the value of input alter then run */
+            /* <input onChange={(event) => console.log(event.target.value)} /> */
+            /* through dot notation goes into object and logs input into console */
 
-{/* onChange when the value of input alter then run */}
-            {/* <input onChange={(event) => console.log(event.target.value)} /> */}
-            {/* through dot notation goes into object and logs input into console */}
-
-{/* dynamic redering */}
-    {/* links to user state */}
+/* dynamic redering */
+    /* links to user state */
 
         // CODE EXAMPLE START (need below)
-    {/* <input onChange={(event) => setUser(event.target.value)} /> */}
+    /* <input onChange={(event) => setUser(event.target.value)} /> */
         // CODE EXAMPLE END
-                {/* shorthand if statement */}
-                        // CODE EXAMPLE START
-                {/* {user && <Box name="Tony" />} */}
+                /* shorthand if statement */
+                // CODE EXAMPLE START
+                /* {user && <Box name="Tony" />} */
         // CODE EXAMPLE END
 
-{/* ------------------------------ */}
+/* ------------------------------ */
 
-    {/* conditional rendering (links to if / else) */}
+    /* conditional rendering (links to if / else) */
 
 
-    {/* shorthand if/else statement */}
+    /* shorthand if/else statement */
 
     // CODE EXAMPLE START
-    {/* {user ? <Box name="Jeff" /> : <Box name="Not Jeff" />} */}
+    /* {user ? <Box name="Jeff" /> : <Box name="Not Jeff" />} */
     // CODE EXAMPLE END
 
 // MISC NOTES
-
-{/* ------------------------------ */}
+/* ------------------------------ */
 // Typical loop
-{/* ------------------------------ */}
+/* ------------------------------ */
 //     for(let i = 0; i < arr.length; i++) {
 //         console.log(arr[i]);
 //     };
@@ -124,4 +126,4 @@ export default App;
 //     arr.map((item, index) => {
 //         console.log(item)
 //     })
-{/* ------------------------------ */}
+/* ------------------------------ */
