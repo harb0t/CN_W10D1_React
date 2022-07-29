@@ -1,70 +1,118 @@
 import { useState, useEffect } from "react";
-import './App.css';
-import Box from "./box";
-import SignOrLog from "./components/signOrLog";
+import Image from "./components/Image";
+import "./App.css";
+import SignUp from "./components/signOrLog";
+import LogIn from "./components/login";
+import DeleteAcc from "./components/deleteAcc";
 
 const App = () => {
-    const [user, setUser] = useState("Steve");
-    const [photos, setPhotos] = useState();
+  const [user, setUser] = useState();
+  const [photos, setPhotos] = useState([]);
 
-//* ------------------------------ *//
-// // pops image immedietly
-// // useEffect(() => {}, [what is is listening for])
-// useEffect(() => {
-//     fetchImages()
-// }, [user]) //everytime user's value changes, useEffecr will run again
-//* ------------------------------ *//
+  // const arr = [{ name: "Steve" }, { name: "Gary" }, { name: "Tony" }];
 
-// Array for previous activity
-// const arr = [{ name: "Steve" }, { name: "Gary" }, { name: "Tony" }];
+  const fetchImages = async () => {
+    const response = await fetch("https://picsum.photos/v2/list");
+    const data = await response.json();
+    setPhotos(data);
+  };
 
-//* ------------------------------ *//
-
-
-// Taking/fetching images from API
-    const fetchImages = async () => {
-        const response = await fetch("https://picsum.photos/v2/list");
-        const data = await response.json();
-        setPhotos(data);
-};
-
-useEffect(() => {
+  useEffect(() => {
     fetchImages();
-  }, [user]); //every time user's value changes, useEffect will run again
+  }, []); //every time user's value changes, useEffect will run again
 
-
-//* ------------------------------ *//
-
-
-return (
+  return (
     <div className="App">
-       <SignOrLog />
-
-
-    <input onChange={(event) => setUser(event.target.value)} />
-
-
-    {user ?   
-    <Box name= 
-    {photos.map((item, index) => {
-        return (
-        <div>
-        <h2>{item.author}</h2>
-            <img src={item.download_url} />
-        </div>
-        );
-    })}
-/> :
-    <Box name="Work gosh darn it" />
-    
-    }
-
+      <div className="Account">
+      <p>Create An Account</p>
+      <SignUp setter={setUser} /> 
+      <p>OR</p>
+      <p>Login</p>
+      <LogIn setter={setUser} /> 
+      </div>
+      <h1>{user}</h1>
+      <DeleteAcc setter={setUser}/>
+      {user && photos.map((item, i) => {
+          return <Image key={i} author={item.author} url={item.download_url} />;
+          
+        })}
     </div>
-    );
-
+  );
 };
 
 export default App;
+
+
+
+//WIP GARBLE
+
+// import { useState, useEffect } from "react";
+// import './App.css';
+// import Box from "./box";
+// import SignOrLog from "./components/signOrLog";
+
+// const App = () => {
+//     const [user, setUser] = useState("Steve");
+//     const [photos, setPhotos] = useState();
+
+// //* ------------------------------ *//
+// // // pops image immedietly
+// // // useEffect(() => {}, [what is is listening for])
+// // useEffect(() => {
+// //     fetchImages()
+// // }, [user]) //everytime user's value changes, useEffecr will run again
+// //* ------------------------------ *//
+
+// // Array for previous activity
+// // const arr = [{ name: "Steve" }, { name: "Gary" }, { name: "Tony" }];
+
+// //* ------------------------------ *//
+
+
+// // Taking/fetching images from API
+//     const fetchImages = async () => {
+//         const response = await fetch("https://picsum.photos/v2/list");
+//         const data = await response.json();
+//         setPhotos(data);
+// };
+
+// useEffect(() => {
+//     fetchImages();
+//   }, [user]); //every time user's value changes, useEffect will run again
+
+
+// //* ------------------------------ *//
+
+
+// return (
+//     <div className="App">
+//        <SignOrLog />
+
+
+//     <input onChange={(event) => setUser(event.target.value)} />
+
+
+//     {user ?   
+//     <Box name= 
+//     {photos.map((item, index) => {
+//         return (
+//         <div>
+//         <h2>{item.author}</h2>
+//             <img src={item.download_url} />
+//         </div>
+//         );
+//     })}
+// /> :
+//     <Box name="Work gosh darn it" />
+    
+//     }
+
+//     </div>
+//     );
+
+// };
+
+// export default App;
 
 //* ------------------------------ *//
 

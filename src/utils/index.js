@@ -1,26 +1,53 @@
-export const signUp = async (username, email, password) => {
+//shorthand export async handles something outside app
+export const signUp = async (username, email, password, setter) => {
     try {
-            const response = await fetch("http//localhost:5001/user", {
-            method: "POST", ///from routes (HTTP verb)
-            headers: {"Content-Type": "appplication/json"}, // sending JSON data instructions
-            // body: {"username": "AndyB", "email": "andyb@email.com", "password": "test123"}
-            // body: {"username": username, "email": email, "password": password}
-            // ---------------
-            // body: JSON.stringify({
-            //     username: username, 
-            //     email: email, 
-            //     password: password,
-                // ------- key / value
-            // ---------------
-            body: JSON.stringify({
-                username, 
-                email, 
-                password,
-            }), //body that has been turned into JSON with stringify
+        const response = await fetch ("http://localhost:5001/user", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        //could write out username,email,pword like thunderclient
+        body: JSON.stringify({
+            username,
+            email,
+            password,
+        }),
         });
         const data = await response.json();
-        console.log(data);
+        setter(data.user.username);
     } catch (error) {
-        console.log(error);
+    console.log(error);
     }
-}
+};
+
+export const deleteAcc = async (username, password, setter) => {
+    try {
+        const response = await fetch ("http://localhost:5001/user/:username", {
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        });
+        const data = await response.json();
+        setter(data.user.username);
+    } catch (error) {
+    console.log(error);
+    }
+};
+
+export const logIn = async (username, password, setter) => {
+    try {
+        const response = await fetch ("http://localhost:5001/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        });
+        const data = await response.json();
+        setter(data.user.username);
+    } catch (error) {
+    console.log(error);
+    }
+};
